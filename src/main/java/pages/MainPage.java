@@ -17,10 +17,27 @@ public class MainPage extends TestBase{
     private WebElement buttonVoteInElection;
     @FindBy(xpath = "//div[text()='Monitor election process']")
     private WebElement buttonMonitor;
+    @FindBy(xpath = "//div[text()='e-Voting']")
+    private WebElement textPage;
 
-    public void mainPage() {
+    public boolean checkTitleThisPage() {
+        String title = getDriver().getTitle();
+        if (title.equals("Voting App")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public MainPage checkTextPage() {
+        new WebDriverWait(getDriver(), 30).until(ExpectedConditions.visibilityOfElementLocated((By)textPage));
+        return this;
+    }
+
+    public MainPage mainPage() {
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("return document.readyState").toString().equals("complete");
+        return this;
     }
 
     public PageElections clickButtonVoteInElection() {
