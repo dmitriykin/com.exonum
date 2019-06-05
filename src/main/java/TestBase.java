@@ -1,11 +1,10 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import java.util.concurrent.TimeUnit;
 
 public abstract class TestBase {
 
-    private WebDriver driver = new ChromeDriver();
+    private WebDriver driver;
 
     public WebDriver getDriver() {
         return driver;
@@ -13,10 +12,15 @@ public abstract class TestBase {
 
      public static final String WEB_SITE = "https://exonum.com/demo/voting/#/welcome";
 
-
     // BeforeTest
     public void openPage() {
-        System.setProperty("webdriver.chrome.driver", "C:\\driversForBrowsers\\chromedriver.exe");
+        String os = System.getProperty("os.name").toLowerCase();
+        driver = new ChromeDriver();
+        if (os.contains("mac")) {
+            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/chromedriver");
+        } else {
+            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\chromedriver.exe");
+        }
         driver.navigate().to(WEB_SITE);
     }
 
