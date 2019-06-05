@@ -2,6 +2,7 @@ package main;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -9,13 +10,13 @@ import java.util.concurrent.TimeUnit;
 public abstract class TestBase {
 
     private WebDriver driver;
-
     public WebDriver getDriver() {
         return driver;
     }
 
     public static final String WEB_SITE = "https://exonum.com/demo/voting/#/welcome";
 
+    public WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 
     // BeforeTest
     public void openPage() {
@@ -33,7 +34,6 @@ public abstract class TestBase {
         turnOnImplicitWait();
         driver.manage().window().maximize();
     }
-
 
     public void turnOnImplicitWait() {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
