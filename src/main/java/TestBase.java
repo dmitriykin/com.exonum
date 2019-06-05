@@ -11,20 +11,22 @@ public abstract class TestBase {
         return driver;
     }
 
-     public static final String WEB_SITE = "https://exonum.com/demo/voting/#/elections/candidates";
-
+     public static final String WEB_SITE = "https://exonum.com/demo/voting/#/welcome";
 
 
     // BeforeTest
     public void openPage() {
         System.setProperty("webdriver.chrome.driver", "C:\\driversForBrowsers\\chromedriver.exe");
         driver.navigate().to(WEB_SITE);
+    }
+
+    public void openBrowser() {
         turnOnImplicitWait();
         driver.manage().window().maximize();
     }
 
     public void turnOnImplicitWait() {
-        driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     public void turnOffImplicitWait() {
