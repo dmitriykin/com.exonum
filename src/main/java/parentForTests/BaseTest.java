@@ -1,22 +1,21 @@
-package main;
+package parentForTests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
 
-public abstract class TestBase {
+public abstract class BaseTest {
 
     private WebDriver driver;
     public WebDriver getDriver() {
         return driver;
     }
 
-    public static final String WEB_SITE = "https://exonum.com/demo/voting/#/welcome";
 
-    public WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+
+    public static final String WEB_SITE = "https://exonum.com/demo/voting/#/welcome";
 
     // BeforeTest
     public void openPage() {

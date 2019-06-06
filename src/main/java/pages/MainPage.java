@@ -1,16 +1,17 @@
 package pages;
 
-import main.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import parentForPages.BasePage;
+import parentForTests.BaseTest;
 
 
-public class MainPage extends TestBase{
+public class MainPage extends BasePage {
 
-    PageElections pageElections;
+   protected ElectionsPage ElectionsPage;
 
     @FindBy(xpath = "//div[text()='VOTE IN ELECTION']")
     private WebElement buttonVoteInElection;
@@ -19,8 +20,12 @@ public class MainPage extends TestBase{
     @FindBy(xpath = "//div[text()='e-Voting']")
     private WebElement textPage;
 
+    public MainPage(BaseTest testClass) {
+        super(testClass);
+    }
+
     public boolean checkTitleThisPage() {
-        String title = getDriver().getTitle();
+        String title = testClass.getDriver().getTitle();
         if (title.equals("Voting App")) {
             return true;
         } else {
@@ -34,19 +39,17 @@ public class MainPage extends TestBase{
     }
 
     public MainPage mainPage() {
-        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        JavascriptExecutor js = (JavascriptExecutor) testClass.getDriver();
         js.executeScript("return document.readyState").toString().equals("complete");
         return this;
     }
 
-    public PageElections clickButtonVoteInElection() {
-       wait.until(ExpectedConditions.visibilityOfElementLocated((By)buttonVoteInElection)).click();
-        return new PageElections();
+    public ElectionsPage clickButtonVoteInElection() {
+        return new ElectionsPage(testClass);
     }
 
-    public PageElections clickButtonMonitor() {
-       wait.until(ExpectedConditions.visibilityOfElementLocated((By)buttonMonitor)).click();
-        return new PageElections();
+    public ElectionsPage clickButtonMonitor() {
+        return new ElectionsPage(testClass);
     }
 
 
