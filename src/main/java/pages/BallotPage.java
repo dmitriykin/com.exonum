@@ -77,8 +77,8 @@ public class BallotPage extends BasePage {
         return table;
     }
 
-    public void ballotPage(int i) {
-        findAllTable().get(i - 1).click();
+    public void clickButton(int digit) {
+        findAllTable().get(digit - 1).click();
     }
 
     public SignedPage clickButtonSignBallot() {

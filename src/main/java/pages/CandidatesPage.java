@@ -48,11 +48,6 @@ public class CandidatesPage extends BasePage {
         return this;
     }
 
-    public WikipediaPage clickOnWikipediaPage() {
-       officialCandidatesPage.click();
-        return new WikipediaPage(testClass);
-    }
-
     public CandidatesPage clickButtonOnCandidatesPage() {
         scrollByPageElement(buttonVoiteOnCandidatesPage);
         clickOnElementByPage(buttonVoiteOnCandidatesPage);

@@ -38,17 +38,19 @@ public class MainPage extends BasePage {
         return this;
     }
 
-    public MainPage mainPage() {
+    public MainPage downloadMainPage() {
         JavascriptExecutor js = (JavascriptExecutor) testClass.getDriver();
         js.executeScript("return document.readyState").toString().equals("complete");
         return this;
     }
 
     public ElectionsPage clickButtonVoteInElection() {
+        buttonVoteInElection.click();
         return new ElectionsPage(testClass);
     }
 
     public ElectionsPage clickButtonMonitor() {
+        buttonMonitor.click();
         return new ElectionsPage(testClass);
     }
 
