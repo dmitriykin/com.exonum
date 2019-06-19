@@ -1,15 +1,17 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import parentForPages.BasePage;
 import parentForTests.BaseTest;
 
+import java.util.List;
+
 public class BallotPage extends BasePage {
 
    protected CandidatesPage candidatesPage;
    protected MainPage mainPage;
-
 
     public BallotPage(BaseTest testClass) {
         super(testClass);
@@ -27,7 +29,9 @@ public class BallotPage extends BasePage {
     private WebElement decryptButtonBallot;
     @FindBy(xpath = "//div[text()='SIGN']")
     private WebElement signButton;
-    @FindBy(xpath = "//div[text()='%s']")
+    @FindBy(xpath = "//div[@class='keyboard-button-digit']")
+    private WebElement allTable;
+    @FindBy(xpath = "//div[@class='keyboard-buttons']//div[text()='%s']")
     private String digitButtons;
     @FindBy(xpath = "//div[text()='SIGN BALLOT']")
     private WebElement buttonSignBallot;
@@ -35,13 +39,21 @@ public class BallotPage extends BasePage {
     private WebElement buttonCancel;
 
     public BallotPage clickSaveButton() {
-        saveButton.click();
+        scrollByPageElement(saveButton);
+        clickOnElementByPage(saveButton);
         return this;
     }
 
     public MainPage clickDiscardButton() {
-        discardButton.click();
+        scrollByPageElement(discardButton);
+        clickOnElementByPage(discardButton);
         return new MainPage(testClass);
+    }
+
+    public BallotPage clickButtonDecrypt() {
+        scrollByPageElement(decryptButton);
+        clickOnElementByPage(decryptButton);
+        return this;
     }
 
     public BallotPage clickOnDecryptButtonCancel() {
@@ -54,9 +66,19 @@ public class BallotPage extends BasePage {
         return this;
     }
 
-    public BallotPage clickSignUPButton() {
-        signButton.click();
+    public BallotPage clickSignButton() {
+        scrollByPageElement(signButton);
+        clickOnElementByPage(signButton);
         return this;
+    }
+
+    protected List<WebElement> findAllTable() {
+        List<WebElement> table = testClass.getDriver().findElements((By) allTable);
+        return table;
+    }
+
+    public void ballotPage(int i) {
+        findAllTable().get(i - 1).click();
     }
 
     public SignedPage clickButtonSignBallot() {
