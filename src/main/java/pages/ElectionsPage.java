@@ -57,4 +57,5 @@ public class ElectionsPage extends BasePage {
         return new CandidatesPage(testClass);
     }
 
+
 }

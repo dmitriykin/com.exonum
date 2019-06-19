@@ -1,12 +1,9 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import parentForPages.BasePage;
 import parentForTests.BaseTest;
-
-import java.util.List;
 
 public class BallotPage extends BasePage {
 
@@ -30,8 +27,12 @@ public class BallotPage extends BasePage {
     private WebElement decryptButtonBallot;
     @FindBy(xpath = "//div[text()='SIGN']")
     private WebElement signButton;
-    @FindBy(xpath = "//div[@ng-click='keyboardButtonClick()']")
-    private WebElement digitalButtons;
+    @FindBy(xpath = "//div[text()='%s']")
+    private String digitButtons;
+    @FindBy(xpath = "//div[text()='SIGN BALLOT']")
+    private WebElement buttonSignBallot;
+    @FindBy(xpath = "//div[text()='CANCEL']")
+    private WebElement buttonCancel;
 
     public BallotPage clickSaveButton() {
         saveButton.click();
@@ -57,6 +58,17 @@ public class BallotPage extends BasePage {
         signButton.click();
         return this;
     }
+
+    public SignedPage clickButtonSignBallot() {
+        buttonSignBallot.click();
+        return new SignedPage(testClass);
+    }
+
+    public BallotPage clickButtonCancel() {
+        buttonCancel.click();
+        return this;
+    }
+
 
 
 

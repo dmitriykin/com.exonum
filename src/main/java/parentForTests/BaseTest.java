@@ -13,8 +13,6 @@ public abstract class BaseTest {
         return driver;
     }
 
-
-
     public static final String WEB_SITE = "https://exonum.com/demo/voting/#/welcome";
 
     // BeforeTest
