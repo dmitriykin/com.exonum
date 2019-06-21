@@ -33,11 +33,6 @@ public class MainPage extends BasePage {
         }
     }
 
-    public MainPage checkTextPage() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated((By)textPage));
-        return this;
-    }
-
     public MainPage downloadMainPage() {
         JavascriptExecutor js = (JavascriptExecutor) testClass.getDriver();
         js.executeScript("return document.readyState").toString().equals("complete");
