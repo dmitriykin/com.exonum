@@ -1,39 +1,23 @@
 package parentForPages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+import abstractForPages.AbstractPage;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import parentForTests.BaseTest;
 
-public abstract class BasePage{
-
-    protected BaseTest testClass;
-    protected WebDriverWait wait = new WebDriverWait(testClass.getDriver(), 30);
+public abstract class BasePage extends AbstractPage {
 
     public BasePage(BaseTest testClass) {
-        this.testClass = testClass;
-        PageFactory.initElements(this.testClass.getDriver(), this);
+        super(testClass);
     }
 
-    public void scrollByPageElement(WebElement elementForScrolling) {
-        JavascriptExecutor js = (JavascriptExecutor) testClass.getDriver();
-        js.executeScript("arguments[0].scrollIntoView(true);", testClass.getDriver().findElement((By) elementForScrolling));
+    protected boolean isSelectedByElement(WebElement element) {
+        return element.isSelected();
     }
 
-    public void clickOnElementByPage(WebElement elementForClick) {
-        if (elementForClick.isDisplayed()) {
-            elementForClick.click();
-        }
-
+    protected boolean isEnabledElement(WebElement element) {
+        return element.isEnabled();
     }
-
-
-
-
-
-
 
 
 }
+

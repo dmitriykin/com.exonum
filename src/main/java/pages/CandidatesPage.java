@@ -1,13 +1,11 @@
 package pages;
 
+import allTable.AllTablePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import parentForPages.BasePage;
 import parentForTests.BaseTest;
 
-import java.util.List;
-
-public class CandidatesPage extends BasePage {
+public class CandidatesPage extends AllTablePage {
 
    protected ElectionsPage electionsPage;
 
@@ -31,36 +29,33 @@ public class CandidatesPage extends BasePage {
     }
 
     public ElectionsPage returnOnElectionsPage() {
-        buttonReturn.click();
+        scrollByElementAndClick(buttonReturn);
         return new ElectionsPage(testClass);
     }
 
     public CandidatesPage clickButtonHelpOnCandidatesPage() {
-        helpButton.click();
+        scrollByElementAndClick(helpButton);
         return this;
     }
-    public List<WebElement> rowsOnCandidatesPage() {
-        return electionsPage.rows();
-    }
 
-    public CandidatesPage checkCandidates(int candidates) {
-        electionsPage.checkElements(candidates);
+    public CandidatesPage choiceCandidates(int numberCandidates) {
+        rows(tableCandidatesPage);
+        checkElements(numberCandidates);
         return this;
     }
 
     public CandidatesPage clickButtonOnCandidatesPage() {
-        scrollByPageElement(buttonVoiteOnCandidatesPage);
-        clickOnElementByPage(buttonVoiteOnCandidatesPage);
+        scrollByElementAndClick(buttonVoiteOnCandidatesPage);
         return this;
     }
 
     public CandidatesPage closeAboutPage() {
-        closeButton.click();
+        scrollByElementAndClick(closeButton);
         return this;
     }
 
     public BallotPage openBalletPage() {
-        buttonYes.click();
+        scrollByElementAndClick(buttonYes);
         return new BallotPage(testClass);
     }
 

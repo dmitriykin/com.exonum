@@ -1,32 +1,31 @@
 package samples;
 
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-import pages.MainPage;
+import org.testng.annotations.*;
 import parentForTests.BaseTest;
 
 
-public class MainPageTest{
+public class MainPageTest extends BaseTest{
 
-    MainPage mainPage;
-    BaseTest baseTest;
-
-    public MainPageTest(MainPage mainPage, BaseTest baseTest) {
-        this.mainPage = mainPage;
-        this.baseTest = baseTest;
+    @BeforeSuite
+    public void setupSystemProperty() {
+        choiceOS();
     }
 
+    @BeforeClass
+    public void openBrowser() {
+        createBrowser();
+    }
 
     @BeforeMethod
-    public void openPage() {
-        baseTest.openPage();
+    public void openURL() {
+        openPage();
+        waitForLoad();
+        turnOnImplicitWait();
     }
 
     @Test
     public void mustOpenThisPage() {
-        mainPage.downloadMainPage();
-        Assert.assertTrue(true);
+
     }
 
 

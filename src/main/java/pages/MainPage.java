@@ -1,13 +1,10 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import parentForPages.BasePage;
 import parentForTests.BaseTest;
-
 
 public class MainPage extends BasePage {
 
@@ -40,12 +37,12 @@ public class MainPage extends BasePage {
     }
 
     public ElectionsPage clickButtonVoteInElection() {
-        buttonVoteInElection.click();
+        scrollByElementAndClick(buttonVoteInElection);
         return new ElectionsPage(testClass);
     }
 
     public ElectionsPage clickButtonMonitor() {
-        buttonMonitor.click();
+        scrollByElementAndClick(buttonMonitor);
         return new ElectionsPage(testClass);
     }
 

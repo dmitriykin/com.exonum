@@ -26,12 +26,12 @@ public class SignedPage extends BasePage {
     }
 
     public SignedPage clickSubmit() {
-        buttonDiscardBallot.click();
+        scrollByElementAndClick(buttonDiscardBallot);
         return this;
     }
 
     public MainPage clickDiscard() {
-        buttonDiscardBallot.click();
+        scrollByElementAndClick(buttonDiscardBallot);
         return new MainPage(testClass);
     }
 

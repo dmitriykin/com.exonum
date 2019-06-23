@@ -1,15 +1,15 @@
 package pages;
 
+import allTable.AllTablePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import parentForPages.BasePage;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import parentForTests.BaseTest;
 
-import java.util.List;
 
-
-public class ElectionsPage extends BasePage {
+public class ElectionsPage extends AllTablePage {
 
     protected MainPage mainPage;
     protected CandidatesPage CandidatesPage;
@@ -30,30 +30,23 @@ public class ElectionsPage extends BasePage {
     }
 
     public MainPage returnOnMainPage() {
-        returnButton.click();
+        scrollByElementAndClick(returnButton);
         return new MainPage(testClass);
     }
 
     public ElectionsPage clickButtonHelp() {
-        buttonHelp.click();
+        scrollByElementAndClick(buttonHelp);
         return this;
     }
 
-    protected List<WebElement> rows() {
-        List<WebElement> row = tableOnElectionsPage.findElements(By.xpath(".//tr"));
-        return row;
-    }
-
-    public ElectionsPage checkElements(int number) {
-        WebElement row = rows().get(number - 1);
-        if (!row.isSelected()) {
-            row.click();
-        }
+    public ElectionsPage choiceRegion(int number) {
+        rows(tableOnElectionsPage);
+        checkElements(number);
         return this;
     }
 
     public CandidatesPage openCandidatesPage() {
-        buttonVoite.click();
+        scrollByElementAndClick(buttonVoite);
         return new CandidatesPage(testClass);
     }
 

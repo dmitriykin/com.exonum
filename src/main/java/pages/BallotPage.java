@@ -39,55 +39,51 @@ public class BallotPage extends BasePage {
     private WebElement buttonCancel;
 
     public BallotPage clickSaveButton() {
-        scrollByPageElement(saveButton);
-        clickOnElementByPage(saveButton);
+        scrollByElementAndClick(saveButton);
         return this;
     }
 
     public MainPage clickDiscardButton() {
-        scrollByPageElement(discardButton);
-        clickOnElementByPage(discardButton);
+       scrollByElementAndClick(discardButton);
         return new MainPage(testClass);
     }
 
     public BallotPage clickButtonDecrypt() {
-        scrollByPageElement(decryptButton);
-        clickOnElementByPage(decryptButton);
+       scrollByElementAndClick(decryptButton);
         return this;
     }
 
     public BallotPage clickOnDecryptButtonCancel() {
-       decryptButtonCancel.click();
+        scrollByElementAndClick(decryptButtonCancel);
         return this;
     }
 
     public BallotPage clickOnDecryptButtonBallot() {
-        decryptButtonBallot.click();
+        scrollByElementAndClick(decryptButtonBallot);
         return this;
     }
 
     public BallotPage clickSignButton() {
-        scrollByPageElement(signButton);
-        clickOnElementByPage(signButton);
+        scrollByElementAndClick(signButton);
         return this;
     }
 
-    protected List<WebElement> findAllTable() {
-        List<WebElement> table = testClass.getDriver().findElements((By) allTable);
-        return table;
-    }
-
-    public void clickButton(int digit) {
-        findAllTable().get(digit - 1).click();
-    }
+//    protected List<WebElement> findAllTable() {
+//        List<WebElement> table = testClass.getDriver().findElements((By) allTable);
+//        return table;
+//    }
+//
+//    public void clickButton(int digit) {
+//        findAllTable().get(digit - 1).click();
+//    }
 
     public SignedPage clickButtonSignBallot() {
-        buttonSignBallot.click();
+        scrollByElementAndClick(buttonSignBallot);
         return new SignedPage(testClass);
     }
 
     public BallotPage clickButtonCancel() {
-        buttonCancel.click();
+        scrollByElementAndClick(buttonCancel);
         return this;
     }
 
