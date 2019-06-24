@@ -35,7 +35,7 @@ public abstract class BaseTest {
 
     private static WebDriver driver;
     private static Actions actions = null;
-    private static final String WEB_SITE = "https://exonum.com/demo/voting/#/welcome";
+    private static final String WEB_SITE = "https://exonum.com/demo/voting/";
 
     public WebDriver getDriver() {
         return driver;
@@ -113,21 +113,24 @@ public abstract class BaseTest {
         return element;
     }
 
-    public void scrollToElementByJsAndClick(WebElement element) {
+    public WebElement scrollToElementByJsAndClick(WebElement element) {
         scrollToElementByJs(element);
         element.click();
+        return element;
     }
 
-    public void waitTillClickableAndClickElement(WebElement element) {
+    public WebElement waitTillClickableAndClickElement(WebElement element) {
         waitTillElementIsClickable(element);
         element.click();
+        return element;
     }
 
-    public void waitTillElementIsVisible(WebElement element) {
+    public WebElement waitTillElementIsVisible(WebElement element) {
         waitTillElementIsVisible(element, false, EXPLICIT_WAIT);
+        return element;
     }
 
-    public void waitTillElementIsVisible(WebElement element, boolean throwException, long timeOutInSeconds) {
+    public WebElement waitTillElementIsVisible(WebElement element, boolean throwException, long timeOutInSeconds) {
         try {
             turnOffImplicitWait();
             WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
@@ -145,13 +148,14 @@ public abstract class BaseTest {
         } finally {
             turnOnImplicitWait();
         }
+        return element;
     }
 
-    public void waitTillElementsAreVisible(List<WebElement> elements) {
-        waitTillElementsAreVisible(elements, false, EXPLICIT_WAIT);
+    public List<WebElement> waitTillElementsAreVisible(List<WebElement> elements) {
+        return waitTillElementsAreVisible(elements, false, EXPLICIT_WAIT);
     }
 
-    public void waitTillElementsAreVisible(List<WebElement> elements, boolean throwException, long timeOutInSeconds) {
+    public List<WebElement> waitTillElementsAreVisible(List<WebElement> elements, boolean throwException, long timeOutInSeconds) {
         try {
             turnOffImplicitWait();
             WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
@@ -169,9 +173,10 @@ public abstract class BaseTest {
         } finally {
             turnOnImplicitWait();
         }
+        return elements;
     }
 
-    public void waitTillElementIsClickable(WebElement element) {
+    public WebElement waitTillElementIsClickable(WebElement element) {
         try {
             turnOffImplicitWait();
             WebDriverWait wait = new WebDriverWait(getDriver(), EXPLICIT_WAIT);
@@ -184,6 +189,7 @@ public abstract class BaseTest {
             turnOnImplicitWait();
         }
         actions.moveToElement(element).build().perform();
+        return element;
     }
 
 }
