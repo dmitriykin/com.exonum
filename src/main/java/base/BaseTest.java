@@ -86,7 +86,7 @@ public abstract class BaseTest {
     private void snapScreenshot() {
         DateFormat date = new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss");
         String fileName = this.getClass().getName() + "_" + date.format(new Date());
-        String screenshotPath = System.getProperties().get("user.dir") + "\\screenshots\\";
+        String screenshotPath = System.getProperties().get("user.dir") + "/target/screenshots/";
         try {
             File f = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(f, new File(screenshotPath + File.separator + fileName + ".png"));
