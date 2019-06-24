@@ -1,64 +1,30 @@
 package pages;
 
-import allTable.AllTablePage;
+import base.BaseTest;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import parentForTests.BaseTest;
 
-public class CandidatesPage extends AllTablePage {
+public class CandidatesPage extends AbstractTablePage {
 
-   protected ElectionsPage electionsPage;
+    @FindBy(xpath = "//div[contains(@class, 'list-option-description')]")
+    private WebElement wikiInfo;
 
-    @FindBy(xpath = "//div[@class='toolbar-return-button pull-left']")
-    private WebElement buttonReturn;
-    @FindBy(xpath = "//div[text()='HELP']")
-    private WebElement helpButton;
-    @FindBy(xpath = "//table[@class='app-list']")
-    private WebElement tableCandidatesPage;
-    @FindBy(xpath = "//a[text()='Official candidate page']")
-    private WebElement officialCandidatesPage;
-    @FindBy(xpath = "//div[text()='VOTE IN ELECTION']")
-    private WebElement buttonVoiteOnCandidatesPage;
-    @FindBy(xpath = "//div[text()='CANCEL']")
-    private WebElement closeButton;
-    @FindBy(xpath = "//div[text()='YES']")
-    private WebElement buttonYes;
+    @FindBy(xpath = "//a[.='Official candidate page']")
+    private WebElement officialCandidatePageLink;
+
 
     public CandidatesPage(BaseTest testClass) {
         super(testClass);
     }
 
-    public ElectionsPage returnOnElectionsPage() {
-        scrollByElementAndClick(buttonReturn);
-        return new ElectionsPage(testClass);
+
+    public String getWikiInfo() {
+        return testClass.waitTillElementIsVisible(wikiInfo).getText();
     }
 
-    public CandidatesPage clickButtonHelpOnCandidatesPage() {
-        scrollByElementAndClick(helpButton);
-        return this;
+    public String getWikiLink() {
+        return testClass.waitTillElementIsVisible(officialCandidatePageLink)
+                .getAttribute("href");
     }
-
-    public CandidatesPage choiceCandidates(int numberCandidates) {
-        rows(tableCandidatesPage);
-        checkElements(numberCandidates);
-        return this;
-    }
-
-    public CandidatesPage clickButtonOnCandidatesPage() {
-        scrollByElementAndClick(buttonVoiteOnCandidatesPage);
-        return this;
-    }
-
-    public CandidatesPage closeAboutPage() {
-        scrollByElementAndClick(closeButton);
-        return this;
-    }
-
-    public BallotPage openBalletPage() {
-        scrollByElementAndClick(buttonYes);
-        return new BallotPage(testClass);
-    }
-
-
 
 }
