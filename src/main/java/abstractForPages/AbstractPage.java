@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import parentForTests.BaseTest;
 
 public abstract class AbstractPage {
-
+//test
     protected BaseTest testClass;
 
     public AbstractPage(BaseTest testClass) {
