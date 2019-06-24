@@ -7,8 +7,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -24,7 +22,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -38,20 +35,15 @@ public abstract class BaseTest {
 
     private static WebDriver driver;
     private static Actions actions = null;
-    private static Wait wait = null;
+    private static final String WEB_SITE = "https://exonum.com/demo/voting/#/welcome";
 
     public WebDriver getDriver() {
         return driver;
     }
 
-    public static final String WEB_SITE = "https://exonum.com/demo/voting/#/welcome";
-
     @BeforeTest
     protected void setUp() {
         configureDriver();
-        wait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(30))
-                .pollingEvery(Duration.ofSeconds(5))
-                .ignoring(NoSuchElementException.class);
         turnOnImplicitWait();
         actions = new Actions(driver);
     }
