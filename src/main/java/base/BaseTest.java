@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -22,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -34,7 +36,7 @@ import static constants.WaitConstant.EXPLICIT_WAIT;
 public abstract class BaseTest {
 
     private static WebDriver driver;
-    private static Actions actions = null;
+    private static Actions actions;
     private static final String WEB_SITE = "https://exonum.com/demo/voting/";
 
     public WebDriver getDriver() {
@@ -106,7 +108,6 @@ public abstract class BaseTest {
     private void turnOffImplicitWait() {
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     }
-
 
     public WebElement scrollToElementByJs(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
@@ -190,6 +191,16 @@ public abstract class BaseTest {
         }
         actions.moveToElement(element).build().perform();
         return element;
+    }
+
+    public void waitTillElementIsInvisible(WebElement element) {
+        new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(10))
+                .pollingEvery(Duration.ofSeconds(1))
+                .ignoring(java.util.NoSuchElementException.class)
+                .ignoring(TimeoutException.class)
+                .ignoring(StaleElementReferenceException.class)
+                .until(ExpectedConditions.invisibilityOf(element));
     }
 
 }

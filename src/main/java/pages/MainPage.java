@@ -8,4 +8,10 @@ public class MainPage extends BasePage {
         super(testClass);
     }
 
+
+    public ElectionsPage clickVoteInElections() {
+        testClass.waitTillClickableAndClickElement(voteInElectionsButton);
+        return new ElectionsPage(testClass);
+    }
+
 }
