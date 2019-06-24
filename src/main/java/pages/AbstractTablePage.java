@@ -2,6 +2,7 @@ package pages;
 
 import base.BaseTest;
 import com.googlecode.junittoolbox.PollingWait;
+import constants.WaitConstant;
 import enums.TableEntry;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -42,7 +43,7 @@ public class AbstractTablePage extends BasePage {
     protected List<WebElement> waitForTableToBeLoad() {
         new PollingWait()
                 .pollEvery(2, TimeUnit.SECONDS)
-                .timeoutAfter(30, TimeUnit.SECONDS)
+                .timeoutAfter(WaitConstant.LONG_TIMEOUT, TimeUnit.SECONDS)
                 .until(() -> getListRows().size() > 0);
         return getListRows();
     }
