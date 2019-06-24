@@ -32,8 +32,9 @@ public class AbstractTablePage extends BasePage {
 
     public CandidatesPage selectListRowAndClick(TableEntry entry) {
         selectListRow(entry);
+        List<WebElement> tableRows = waitForTableToBeLoad();
         testClass.scrollToElementByJsAndClick(voteInElectionsButton);
-        waitForTableToBeLoad().forEach(rt -> {
+        tableRows.forEach(rt -> {
             if (rt.getText().contains(entry.getLabel()))
                 testClass.waitTillElementIsInvisible(rt);
         });
