@@ -1,7 +1,7 @@
 package pages;
 
 import base.BaseTest;
-import constant.WaitConstant;
+import constants.WaitConstant;
 import lombok.extern.java.Log;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.PageFactory;

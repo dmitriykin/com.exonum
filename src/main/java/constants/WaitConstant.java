@@ -1,4 +1,4 @@
-package constant;
+package constants;
 
 public class WaitConstant {
     public static final long EXPLICIT_WAIT = 8;

@@ -15,6 +15,9 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Listeners;
+import org.testng.reporters.SuiteHTMLReporter;
+import org.testng.reporters.XMLReporter;
 import pages.MainPage;
 
 import java.io.File;
@@ -26,9 +29,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static constant.WaitConstant.EXPLICIT_WAIT;
+import static constants.WaitConstant.EXPLICIT_WAIT;
 
 @Log
+@Listeners({SuiteHTMLReporter.class, XMLReporter.class})
 public abstract class BaseTest {
 
     private static WebDriver driver;
