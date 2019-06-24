@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import static constants.WaitConstant.EXPLICIT_WAIT;
@@ -74,12 +75,18 @@ public abstract class BaseTest {
     }
 
     private void setDriverPathByOs() {
-        String os = System.getProperty("os.name").toLowerCase();
-        if (os.contains("mac")) {
-            System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver");
+        String osDriverName;
+        String os = System.getProperty("os.name", "generic").toLowerCase(Locale.ENGLISH);
+        if ((os.contains("mac")) || (os.contains("darwin"))) {
+            osDriverName = "mac64";
+        } else if (os.contains("win")) {
+            osDriverName = "win_32.exe";
+        } else if (os.contains("nux")) {
+            osDriverName = "linux64"; //TODO: add chrome_linux64 driver into resources
         } else {
-            System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\drivers\\chromedriver.exe");
+            throw new RuntimeException("Cannot define your OS: " + os);
         }
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chrome_" + osDriverName);
     }
 
     private void snapScreenshot() {
