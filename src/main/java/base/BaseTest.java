@@ -100,21 +100,21 @@ public abstract class BaseTest {
         return new MainPage(this);
     }
 
-    public void turnOnImplicitWait() {
+    private void turnOnImplicitWait() {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
-    public void turnOffImplicitWait() {
+    private void turnOffImplicitWait() {
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     }
 
 
-    protected WebElement scrollToElementByJs(WebElement element) {
+    public WebElement scrollToElementByJs(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         return element;
     }
 
-    protected void scrollToElementByJsAndClick(WebElement element) {
+    public void scrollToElementByJsAndClick(WebElement element) {
         scrollToElementByJs(element);
         element.click();
     }
@@ -186,4 +186,5 @@ public abstract class BaseTest {
         }
         actions.moveToElement(element).build().perform();
     }
+
 }
