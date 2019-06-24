@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class AbstractTablePage extends BasePage {
+public abstract class AbstractTablePage extends BasePage {
 
     public AbstractTablePage(BaseTest testClass) {
         super(testClass);
@@ -32,7 +32,7 @@ public class AbstractTablePage extends BasePage {
 
     public CandidatesPage selectListRowAndClick(TableEntry entry) {
         selectListRow(entry);
-        List<WebElement> tableRows = waitForTableToBeLoad();
+        List<WebElement> tableRows = getListRows();
         testClass.scrollToElementByJsAndClick(voteInElectionsButton);
         tableRows.forEach(rt -> {
             if (rt.getText().contains(entry.getLabel()))
