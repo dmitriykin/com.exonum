@@ -31,7 +31,21 @@ public class EstonianPresidentElectionTest extends BaseTest {
     }
 
     private <T extends CandidatesPage> String sendPostToWikiAndParseResponse(T page) {
-        return Jsoup.parse(HttpRequest.executePost(page.getWikiLink())).text();
+        String pageContent = Jsoup.parse(HttpRequest.executePost(page.getWikiLink())).text();
+        final String paragraphStartStr = "2015 ";
+        pageContent = pageContent.substring(pageContent.indexOf(paragraphStartStr) + paragraphStartStr.length());
+        int dotCounter = 0;
+        int index = -1;
+        char[] charArray = pageContent.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            if (dotCounter == 2) {
+                index = i;
+                break;
+            }
+            if (charArray[i] == '.') dotCounter++;
+        }
+        pageContent = pageContent.substring(0, index);
+        return pageContent;
     }
 
 }
