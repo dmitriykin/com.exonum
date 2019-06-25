@@ -41,6 +41,7 @@ public abstract class AbstractTablePage extends BasePage {
         return new CandidatesPage(testClass);
     }
 
+
     protected List<WebElement> waitForTableToBeLoad() {
         new PollingWait()
                 .pollEvery(2, TimeUnit.SECONDS)
