@@ -14,5 +14,10 @@ public abstract class BasePage extends AbstractPage {
         super(testClass);
     }
 
+    public <T extends AbstractPage> T clickVoteInElectionsButton(Class<T> pageToReturn) {
+        testClass.waitTillClickableAndClickElement(voteInElectionsButton);
+        return createPage(pageToReturn);
+    }
+
 }
 

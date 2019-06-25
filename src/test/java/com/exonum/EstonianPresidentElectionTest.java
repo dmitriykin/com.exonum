@@ -1,10 +1,12 @@
 package com.exonum;
 
 import base.BaseTest;
+import components.CandidateDetailsPopup;
 import enums.TableEntry;
 import lombok.extern.java.Log;
 import org.jsoup.Jsoup;
 import org.testng.annotations.Test;
+import pages.BallotPage;
 import pages.CandidatesPage;
 import pages.ElectionsPage;
 import pages.MainPage;
@@ -14,6 +16,7 @@ import static org.testng.Assert.assertEquals;
 
 @Log
 public class EstonianPresidentElectionTest extends BaseTest {
+
 
     @Test
     public void eikiNestorTest() {
@@ -28,6 +31,9 @@ public class EstonianPresidentElectionTest extends BaseTest {
         assertEquals(sendPostToWikiAndParseResponse(candidatesPage),
                 candidatesPage.getWikiInfo(),
                 TableEntry.EIKI_NESTOR.getLabel() + "'s information doesn't correspond to official page");
+
+        BallotPage ballotPage = candidatesPage.voteInElection(BallotPage.class);
+
     }
 
     private <T extends CandidatesPage> String sendPostToWikiAndParseResponse(T page) {

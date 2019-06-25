@@ -1,6 +1,7 @@
 package pages;
 
 import base.BaseTest;
+import components.CandidateDetailsPopup;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -25,6 +26,11 @@ public class CandidatesPage extends AbstractTablePage {
     public String getWikiLink() {
         return testClass.waitTillElementIsVisible(officialCandidatePageLink)
                 .getAttribute("href");
+    }
+
+    public <T extends AbstractPage> T voteInElection(Class<T> pageToReturn) {
+        CandidateDetailsPopup candidateDetailsPopup = clickVoteInElectionsButton(CandidateDetailsPopup.class);
+        return candidateDetailsPopup.clickOk(pageToReturn);
     }
 
 }
