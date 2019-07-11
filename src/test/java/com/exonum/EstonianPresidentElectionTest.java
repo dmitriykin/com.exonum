@@ -1,11 +1,11 @@
 package com.exonum;
 
 import base.BaseTest;
+import components.BallotDetailsPopup;
 import enums.TableEntry;
 import lombok.extern.java.Log;
 import org.jsoup.Jsoup;
 import org.testng.annotations.Test;
-import pages.BallotPage;
 import pages.CandidatesPage;
 import pages.ElectionsPage;
 import pages.MainPage;
@@ -31,8 +31,11 @@ public class EstonianPresidentElectionTest extends BaseTest {
                 candidatesPage.getWikiInfo(),
                 TableEntry.EIKI_NESTOR.getLabel() + "'s information doesn't correspond to official page");
 
-        BallotPage ballotPage = candidatesPage.voteInElection(BallotPage.class);
-        ballotPage.clickButtons(BallotPage.class);
+        BallotDetailsPopup ballotPage = candidatesPage.voteInElection(BallotDetailsPopup.class);
+        ballotPage.clickOk(BallotDetailsPopup.class);
+
+
+
 
     }
 

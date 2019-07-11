@@ -28,7 +28,7 @@ public abstract class AbstractPopupPage extends AbstractComponent {
         }
         }
 
-    private WebDriver driver = testClass.getDriver();
+
     private WebElement okButton;
     private WebElement cancelButton;
     private WebElement saveButton;
@@ -40,22 +40,34 @@ public abstract class AbstractPopupPage extends AbstractComponent {
 
     public AbstractPopupPage(BaseTest testClass, ActionButton okButton, ActionButton cancelButton) {
         super(testClass);
-        String buttonLocator = "//div[contains(@class, 'button') and .='%s']";
-        this.okButton = driver.findElement(By.xpath(String.format(buttonLocator, okButton.getLabel())));
-        this.cancelButton = driver.findElement(By.xpath(String.format(buttonLocator, cancelButton.getLabel())));
-    }
-
-    public void initButton(ActionButton saveButton, ActionButton discardButton, ActionButton decryptButton, ActionButton signButton) {
-        String Xpath = "//div[contains(@class, 'button') and .='%s']";
-        this.saveButton = driver.findElement(By.xpath(String.format(Xpath, saveButton.getLabel())));
-        this.discardButton = driver.findElement(By.xpath(String.format(Xpath, discardButton.getLabel())));
-        this.decryptButton = driver.findElement(By.xpath(String.format(Xpath, decryptButton.getLabel())));
-        this.signButton = driver.findElement(By.xpath(String.format(Xpath, signButton.getLabel())));
+        initButton(okButton, cancelButton);
     }
 
     public AbstractPopupPage(BaseTest testClass, ActionButton saveButton, ActionButton discardButton, ActionButton decryptButton, ActionButton signButton) {
         super(testClass);
         initButton(saveButton, discardButton, decryptButton, signButton);
+    }
+
+    public void initButton(ActionButton saveButton, ActionButton discardButton, ActionButton decryptButton, ActionButton signButton) {
+        WebDriver driver = testClass.getDriver();
+        String xpath = "//div[contains(@class, 'button') and .='%s']";
+        if (saveButton != null)
+            this.saveButton = driver.findElement(By.xpath(String.format(xpath, saveButton.getLabel())));
+        if (discardButton != null)
+            this.discardButton = driver.findElement(By.xpath(String.format(xpath, discardButton.getLabel())));
+        if(decryptButton != null)
+            this.decryptButton = driver.findElement(By.xpath(String.format(xpath, decryptButton.getLabel())));
+        if (signButton != null)
+            this.signButton = driver.findElement(By.xpath(String.format(xpath, signButton.getLabel())));
+    }
+
+    public void initButton(ActionButton okButton, ActionButton cancelButton) {
+        WebDriver driver = testClass.getDriver();
+        String xpath = "//div[contains(@class, 'button') and .='%s']";
+        if(okButton != null)
+            this.okButton = driver.findElement(By.xpath(String.format(xpath, okButton.getLabel())));
+        if(cancelButton != null)
+            this.cancelButton = driver.findElement(By.xpath(String.format(xpath, cancelButton.getLabel())));
     }
 
     public <T extends AbstractPage> T clickOk(Class<T> pageToReturn) {
@@ -83,7 +95,7 @@ public abstract class AbstractPopupPage extends AbstractComponent {
     }
 
     private <T extends AbstractPage> T clickButtonAndReturnPage(Class<T> pageToReturn, WebElement button) {
-        testClass.scrollToElementByJsAndClick(button);
+        testClass.waitTillClickableAndClickElement(button);
         return createPage(pageToReturn);
     }
 }
