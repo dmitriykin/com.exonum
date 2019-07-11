@@ -13,11 +13,12 @@ public abstract class AbstractPopupPage extends AbstractComponent {
     private WebElement cancelButton;
 
 
-    public AbstractPopupPage(BaseTest testClass) {
+    public AbstractPopupPage(BaseTest testClass, ActionButton okButton, ActionButton cancelButton) {
         super(testClass);
+        createButton(okButton, cancelButton);
     }
 
-    public void initButton(ActionButton okButton, ActionButton cancelButton) {
+    public void createButton(ActionButton okButton, ActionButton cancelButton) {
         WebDriver driver = testClass.getDriver();
         String xpath = "//div[contains(@class, 'button') and .='%s']";
         if(okButton != null)

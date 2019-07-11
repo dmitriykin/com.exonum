@@ -10,10 +10,10 @@ public class BallotDetailsPage extends BasePage {
         super(testClass);
     }
 
-    public <T extends AbstractPage> T clickButton(Class<T> pagereturn, ActionButton button) {
+    public <T extends AbstractPage> T clickButton(Class<T> pageToReturn, ActionButton button) {
         WebDriver driver = testClass.getDriver();
         String xpath = "//div[contains(@class, 'button') and .='%s']";
         testClass.waitTillClickableAndClickElement(driver.findElement(By.xpath(String.format(xpath, button.getLabel()))));
-        return createPage(pagereturn);
+        return createPage(pageToReturn);
     }
 }
