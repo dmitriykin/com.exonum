@@ -95,7 +95,7 @@ public abstract class AbstractPopupPage extends AbstractComponent {
     }
 
     private <T extends AbstractPage> T clickButtonAndReturnPage(Class<T> pageToReturn, WebElement button) {
-        testClass.waitTillClickableAndClickElement(button);
+        testClass.scrollToElementByJsAndClick(button);
         return createPage(pageToReturn);
     }
 }
