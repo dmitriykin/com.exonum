@@ -32,6 +32,7 @@ public class EstonianPresidentElectionTest extends BaseTest {
                 TableEntry.EIKI_NESTOR.getLabel() + "'s information doesn't correspond to official page");
 
         BallotDetailsPopup ballotPage = candidatesPage.voteInElection(BallotDetailsPopup.class);
+        ballotPage.clickOk(BallotDetailsPopup.class);
 
 
 
