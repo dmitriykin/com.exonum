@@ -1,6 +1,8 @@
 package com.exonum;
 
 import base.BaseTest;
+import components.PinComponent;
+import enums.ActionButton;
 import enums.TableEntry;
 import lombok.extern.java.Log;
 import org.jsoup.Jsoup;
@@ -32,6 +34,7 @@ public class EstonianPresidentElectionTest extends BaseTest {
                 TableEntry.EIKI_NESTOR.getLabel() + "'s information doesn't correspond to official page");
 
         BallotDetailsPage ballotDetailsPage = candidatesPage.voteInElection(BallotDetailsPage.class);
+        PinComponent pinComponent = ballotDetailsPage.clickButton(PinComponent.class, ActionButton.SIGN);
 
 
 
