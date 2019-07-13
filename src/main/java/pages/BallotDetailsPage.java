@@ -14,6 +14,11 @@ public class BallotDetailsPage extends BasePage {
     public <T extends AbstractPage> T clickButton(Class<T> pageToReturn, ActionButton button) {
         WebDriver driver = testClass.getDriver();
         String xpath = "//div[contains(@class, 'button') and .='%s']";
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         testClass.scrollToElementByJsAndClick(driver.findElement(By.xpath(String.format(xpath, button.getLabel()))));
         return createPage(pageToReturn);
     }
