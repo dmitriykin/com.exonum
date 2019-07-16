@@ -1,17 +1,20 @@
 package com.exonum;
 
 import base.BaseTest;
+import components.CandidateDetailsPopup;
 import components.PinComponent;
 import enums.ActionButton;
 import enums.TableEntry;
 import lombok.extern.java.Log;
 import org.jsoup.Jsoup;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
-import pages.BallotDetailsPage;
-import pages.CandidatesPage;
-import pages.ElectionsPage;
-import pages.MainPage;
+import pages.*;
 import utils.HttpRequest;
+
+import java.util.Arrays;
+import java.util.Random;
 
 import static org.testng.Assert.assertEquals;
 
@@ -35,11 +38,7 @@ public class EstonianPresidentElectionTest extends BaseTest {
 
         BallotDetailsPage ballotDetailsPage = candidatesPage.voteInElection(BallotDetailsPage.class);
         PinComponent pinComponent = ballotDetailsPage.clickButton(PinComponent.class, ActionButton.SIGN);
-
-
-
-
-
+        SignedPage signedPage = pinComponent.clickPinButtons(Arrays.asList(1,2,3,4), SignedPage.class);
 
     }
 

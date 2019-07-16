@@ -6,7 +6,8 @@ public enum ActionButton {
     SAVE("Save 3-word memo and ballot hash"),
     DISCARD("DISCARD"),
     DECRYPT("DECRYPT"),
-    SIGN("SIGN");
+    SIGN("SIGN"),
+    SIGN_BALLOT("SIGN BALLOT");
 
     private final String label;
 

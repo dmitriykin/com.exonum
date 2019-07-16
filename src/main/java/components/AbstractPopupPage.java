@@ -1,11 +1,16 @@
 package components;
 
 import base.BaseTest;
+import com.googlecode.junittoolbox.PollingWait;
 import enums.ActionButton;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.AbstractPage;
+
+import java.util.concurrent.TimeUnit;
 
 public abstract class AbstractPopupPage extends AbstractComponent {
 
@@ -26,6 +31,11 @@ public abstract class AbstractPopupPage extends AbstractComponent {
 
     }
 
+    public AbstractPopupPage(BaseTest testClass) {
+        super(testClass);
+    }
+
+
     public void initButtons(ActionButton okButton, ActionButton cancelButton) {
         WebDriver driver = testClass.getDriver();
         String xpath = rootXpath + "//div[contains(@class, 'button') and .='%s']";
@@ -44,8 +54,10 @@ public abstract class AbstractPopupPage extends AbstractComponent {
         return clickButtonAndReturnPage(pageToReturn, cancelButton);
     }
 
+
     private <T extends AbstractPage> T clickButtonAndReturnPage(Class<T> pageToReturn, WebElement button) {
         testClass.waitTillClickableAndClickElement(button);
         return createPage(pageToReturn);
     }
+
 }
