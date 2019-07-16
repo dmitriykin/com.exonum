@@ -14,17 +14,17 @@ public class PinComponent extends AbstractPopupPage {
         super(testClass, signButton, cancelButton, rootXpath);
     }
 
-    private WebElement getPinDigit(int digit) {
+    private WebElement pinCodeButtons(int digit) {
         WebDriver driver = testClass.getDriver();
-        String xpathForDigits = "//div[@class='keyboard-button-digit' and .='%s']";
-        return driver.findElement(By.xpath(String.format(String.format(xpathForDigits, String.valueOf(digit)))));
+        String xpathForDigits = "//div[@class='keyboard-button-digit' and .='%d']";
+        return driver.findElement(By.xpath(String.format(String.format(xpathForDigits, digit))));
     }
 
-    public PinComponent pin(List<Integer> digits) {
+    public <T extends AbstractPopupPage> T clickPinButtons(Class<T> pageToReturn, List<Integer> digits) {
         for (Integer digit : digits) {
-            testClass.waitTillClickableAndClickElement(getPinDigit(digit));
+            testClass.waitTillClickableAndClickElement(pinCodeButtons(digit));
         }
-        return this;
+        return clickOk(pageToReturn);
     }
 
 

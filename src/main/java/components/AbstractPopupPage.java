@@ -9,9 +9,9 @@ import pages.AbstractPage;
 
 public abstract class AbstractPopupPage extends AbstractComponent {
 
-    protected WebElement okButton;
-    protected WebElement cancelButton;
-    public String rootXpath = "";
+    private WebElement okButton;
+    private WebElement cancelButton;
+    private String rootXpath = "";
 
 
     public AbstractPopupPage(BaseTest testClass, ActionButton okButton, ActionButton cancelButton) {
