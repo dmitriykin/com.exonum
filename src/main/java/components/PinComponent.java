@@ -11,8 +11,10 @@ import java.util.List;
 
 public class PinComponent extends AbstractPopupPage {
 
+    private static final String AREA_XPATH = "//div[contains(@class, 'modal-decrypt-dark')]";
+
     public PinComponent(BaseTest testClass) {
-        super(testClass);
+        super(testClass, ActionButton.SIGN_BALLOT, ActionButton.CANCEL, AREA_XPATH);
     }
 
     private WebElement pinCodeButtons(int digit) {

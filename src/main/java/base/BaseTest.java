@@ -122,16 +122,7 @@ public abstract class BaseTest {
 
     public WebElement waitTillClickableAndClickElement(WebElement element) {
         waitTillElementIsClickable(element);
-        if(element.isEnabled()) element.click();
-        return element;
-    }
-
-    public WebElement waitElementIsVisibleAndClickOfOffset(WebElement element, int x, int y) {
-        waitTillElementIsVisible(element);
-        actions.moveToElement(element, x, y);
-        actions.click();
-        actions.build();
-        actions.perform();
+        element.click();
         return element;
     }
 

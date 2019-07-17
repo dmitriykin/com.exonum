@@ -7,7 +7,9 @@ public enum ActionButton {
     DISCARD("DISCARD"),
     DECRYPT("DECRYPT"),
     SIGN("SIGN"),
-    SIGN_BALLOT("SIGN BALLOT");
+    SIGN_BALLOT("SIGN BALLOT"),
+    SUBMIT_BALLOT("SUBMIT BALLOT"),
+    DISCARD_BALLOT("DISCARD BALLOT");
 
     private final String label;
 

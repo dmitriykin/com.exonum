@@ -31,10 +31,6 @@ public abstract class AbstractPopupPage extends AbstractComponent {
 
     }
 
-    public AbstractPopupPage(BaseTest testClass) {
-        super(testClass);
-    }
-
 
     public void initButtons(ActionButton okButton, ActionButton cancelButton) {
         WebDriver driver = testClass.getDriver();

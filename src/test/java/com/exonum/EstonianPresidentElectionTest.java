@@ -1,19 +1,17 @@
 package com.exonum;
 
 import base.BaseTest;
-import components.CandidateDetailsPopup;
 import components.PinComponent;
 import enums.ActionButton;
 import enums.TableEntry;
 import lombok.extern.java.Log;
 import org.jsoup.Jsoup;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import pages.*;
 import utils.HttpRequest;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import static org.testng.Assert.assertEquals;
@@ -38,8 +36,18 @@ public class EstonianPresidentElectionTest extends BaseTest {
 
         BallotDetailsPage ballotDetailsPage = candidatesPage.voteInElection(BallotDetailsPage.class);
         PinComponent pinComponent = ballotDetailsPage.clickButton(PinComponent.class, ActionButton.SIGN);
-        SignedPage signedPage = pinComponent.clickPinButtons(Arrays.asList(1,2,3,4), SignedPage.class);
+        SignedPage signedPage = pinComponent.clickPinButtons(genereatePinNumbers(4), SignedPage.class);
+        signedPage.enterAndClick("email", SignedPage.class);
 
+    }
+
+    private List<Integer> genereatePinNumbers(int numbersByClick) {
+        List<Integer> fillArray = new ArrayList<Integer>() {{
+            for (int i = 0; i < numbersByClick; i++) {
+                add(new Random().nextInt(10));
+            }
+        }};
+        return fillArray;
     }
 
     private <T extends CandidatesPage> String sendPostToWikiAndParseResponse(T page) {
