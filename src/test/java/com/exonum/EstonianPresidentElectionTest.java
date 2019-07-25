@@ -44,8 +44,7 @@ public class EstonianPresidentElectionTest extends BaseTest {
         PinComponent pinComponent = ballotDetailsPage.clickButton(PinComponent.class, ActionButton.SIGN);
         SignedPage signedPage = pinComponent.clickPinButtons(genereatePinNumbers(4), SignedPage.class);
         GuerillaMailApi guerillaMailApi = new GuerillaMailApi();
-        guerillaMailApi.genereateMail("test");
-        signedPage.enterAndClick(guerillaMailApi.getEmailAddress(), SignedPage.class);
+        signedPage.enterAndClick(guerillaMailApi.genereateMail("test"), SignedPage.class);
 
     }
 
