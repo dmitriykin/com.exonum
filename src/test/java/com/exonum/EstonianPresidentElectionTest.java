@@ -1,29 +1,27 @@
 package com.exonum;
 
-import api.GuerillaMailApi;
+import api.SendEmailScenario;
 import base.BaseTest;
-import com.jayway.restassured.path.json.JsonPath;
-import com.jayway.restassured.response.Response;
 import components.PinComponent;
 import enums.ActionButton;
 import enums.TableEntry;
 import lombok.extern.java.Log;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.jsoup.Jsoup;
-import org.openqa.selenium.json.Json;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
 import utils.HttpRequest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.testng.Assert.assertEquals;
 
 @Log
-public class EstonianPresidentElectionTest extends BaseTest {
+public class EstonianPresidentElectionTest extends SendEmailScenario {
 
 
     @Test
@@ -43,8 +41,7 @@ public class EstonianPresidentElectionTest extends BaseTest {
         BallotDetailsPage ballotDetailsPage = candidatesPage.voteInElection(BallotDetailsPage.class);
         PinComponent pinComponent = ballotDetailsPage.clickButton(PinComponent.class, ActionButton.SIGN);
         SignedPage signedPage = pinComponent.clickPinButtons(genereatePinNumbers(4), SignedPage.class);
-        GuerillaMailApi guerillaMailApi = new GuerillaMailApi();
-        signedPage.enterAndClick(guerillaMailApi.genereateMail("test"), SignedPage.class);
+        signedPage.enterAndClick(genereateMail(), SignedPage.class);
 
     }
 
