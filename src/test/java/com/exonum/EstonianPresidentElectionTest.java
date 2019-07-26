@@ -1,20 +1,27 @@
 package com.exonum;
 
+import api.SendEmailScenario;
 import base.BaseTest;
+import components.PinComponent;
+import enums.ActionButton;
 import enums.TableEntry;
 import lombok.extern.java.Log;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.jsoup.Jsoup;
 import org.testng.annotations.Test;
-import pages.BallotDetailsPage;
-import pages.CandidatesPage;
-import pages.ElectionsPage;
-import pages.MainPage;
+import pages.*;
 import utils.HttpRequest;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import static com.jayway.restassured.RestAssured.given;
 import static org.testng.Assert.assertEquals;
 
 @Log
-public class EstonianPresidentElectionTest extends BaseTest {
+public class EstonianPresidentElectionTest extends SendEmailScenario {
 
 
     @Test
@@ -32,12 +39,21 @@ public class EstonianPresidentElectionTest extends BaseTest {
                 TableEntry.EIKI_NESTOR.getLabel() + "'s information doesn't correspond to official page");
 
         BallotDetailsPage ballotDetailsPage = candidatesPage.voteInElection(BallotDetailsPage.class);
+        PinComponent pinComponent = ballotDetailsPage.clickButton(PinComponent.class, ActionButton.SIGN);
+        SignedPage signedPage = pinComponent.clickPinButtons(genereatePinNumbers(4), SignedPage.class);
+        signedPage.enterAndClick(genereateMail(), SignedPage.class);
+
+    }
 
 
 
-
-
-
+    private List<Integer> genereatePinNumbers(int numbersByClick) {
+        List<Integer> fillArray = new ArrayList<Integer>() {{
+            for (int i = 0; i < numbersByClick; i++) {
+                add(new Random().nextInt(10));
+            }
+        }};
+        return fillArray;
     }
 
     private <T extends CandidatesPage> String sendPostToWikiAndParseResponse(T page) {
